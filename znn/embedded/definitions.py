@@ -57,6 +57,31 @@ COMMON_DEFINITION = """[
 {"type":"function","name":"CollectReward","inputs":[]}
 ]"""
 
+PTLC_DEFINITION = """[
+{"type":"function","name":"Create","inputs":[{"name":"pointLocked","type":"address"},{"name":"expirationTime","type":"int64"},{"name":"pointLock","type":"bytes"}]},
+{"type":"function","name":"Reclaim","inputs":[{"name":"id","type":"hash"}]},
+{"type":"function","name":"Unlock","inputs":[{"name":"id","type":"hash"},{"name":"scalar","type":"bytes"}]},
+{"type":"function","name":"DenyProxyUnlock","inputs":[]},
+{"type":"function","name":"AllowProxyUnlock","inputs":[]}
+]"""
+
+BITCOIN_SPV_DEFINITION = """[
+{"type":"function","name":"SubmitHeaders","inputs":[{"name":"headers","type":"bytes"}]},
+{"type":"function","name":"VerifyTransaction","inputs":[{"name":"txHash","type":"bytes"},{"name":"blockHeight","type":"uint64"},{"name":"merkleProof","type":"bytes"},{"name":"txIndex","type":"uint32"}]}
+]"""
+
+GOVERNANCE_DEFINITION = """[
+{"type":"function","name":"CreateProposal","inputs":[{"name":"title","type":"string"},{"name":"description","type":"string"},{"name":"url","type":"string"},{"name":"votingPeriod","type":"uint64"}]},
+{"type":"function","name":"CastVote","inputs":[{"name":"id","type":"hash"},{"name":"vote","type":"uint8"}]},
+{"type":"function","name":"Execute","inputs":[{"name":"id","type":"hash"}]}
+]"""
+
+ATOMIC_SWAP_DEFINITION = """[
+{"type":"function","name":"CreateSwap","inputs":[{"name":"counterparty","type":"address"},{"name":"btcTxHash","type":"bytes"},{"name":"expirationTime","type":"int64"}]},
+{"type":"function","name":"ClaimSwap","inputs":[{"name":"swapId","type":"hash"},{"name":"blockHeader","type":"bytes"},{"name":"merkleProof","type":"bytes"},{"name":"txIndex","type":"uint32"}]},
+{"type":"function","name":"ReclaimSwap","inputs":[{"name":"swapId","type":"hash"}]}
+]"""
+
 PLASMA_ABI = ABI.from_json(PLASMA_DEFINITION)
 PILLAR_ABI = ABI.from_json(PILLAR_DEFINITION)
 TOKEN_ABI = ABI.from_json(TOKEN_DEFINITION)
@@ -65,3 +90,7 @@ SWAP_ABI = ABI.from_json(SWAP_DEFINITION)
 STAKE_ABI = ABI.from_json(STAKE_DEFINITION)
 ACCELERATOR_ABI = ABI.from_json(ACCELERATOR_DEFINITION)
 COMMON_ABI = ABI.from_json(COMMON_DEFINITION)
+PTLC_ABI = ABI.from_json(PTLC_DEFINITION)
+BITCOIN_SPV_ABI = ABI.from_json(BITCOIN_SPV_DEFINITION)
+GOVERNANCE_ABI = ABI.from_json(GOVERNANCE_DEFINITION)
+ATOMIC_SWAP_ABI = ABI.from_json(ATOMIC_SWAP_DEFINITION)
